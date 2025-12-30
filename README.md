@@ -151,3 +151,6 @@ Future plans include:
 * Enhancing the mod installation experience.
 
 We welcome community feedback and suggestions for our roadmap.  Please feel free to open a feature request in our [issue tracker](https://github.com/AngelAuraMC/Amethyst-Android/issues).
+
+## API
+You can start Profiles including Quick Launch using Intents. For a Detailed Documentation go to {app_pojavlauncher/src/main/java/net/kdt/pojavlaunch/api/LAUNCHAPI.md}

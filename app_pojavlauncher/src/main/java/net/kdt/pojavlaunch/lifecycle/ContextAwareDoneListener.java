@@ -24,7 +24,7 @@ public class ContextAwareDoneListener implements AsyncMinecraftDownloader.DoneLi
         this.mNormalizedVersionid = versionId;
     }
 
-    private Intent createGameStartIntent(Context context) {
+    protected Intent createGameStartIntent(Context context) {
         Intent mainIntent = new Intent(context, MainActivity.class);
         mainIntent.putExtra(INTENT_MINECRAFT_VERSION, mNormalizedVersionid);
         mainIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);

@@ -31,6 +31,7 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.Map;
+import java.util.concurrent.Future;
 
 /** Allow to perform a background login on a given account */
 // TODO handle connection errors !
@@ -67,11 +68,15 @@ public class MicrosoftBackgroundLogin {
         mAuthCode = authCode;
     }
 
-    /** Performs a full login, calling back listeners appropriately  */
-    public void performLogin(@Nullable final ProgressListener progressListener,
-                             @Nullable final DoneListener doneListener,
-                             @Nullable final ErrorListener errorListener){
-        sExecutorService.execute(() -> {
+    /**
+     * Performs a full login, calling back listeners appropriately
+     *
+     * @return A Future object that can be used to cancel the login or more importantly to check if it is done
+     */
+    public Future<?> performLogin(@Nullable final ProgressListener progressListener,
+                                  @Nullable final DoneListener doneListener,
+                                  @Nullable final ErrorListener errorListener){
+        return sExecutorService.submit(() -> {
             try {
                 notifyProgress(progressListener, 1);
                 String accessToken = acquireAccessToken(mIsRefresh, mAuthCode);

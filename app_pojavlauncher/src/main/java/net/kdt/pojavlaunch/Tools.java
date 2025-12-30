@@ -1293,6 +1293,19 @@ public final class Tools {
         Logger.appendToLog("Info: Graphics device: "+info.vendor+ " "+info.renderer+" (OpenGL ES "+info.glesMajorVersion+")");
     }
 
+    public static List<File> listFiles(String dir) {
+        List<File> fileList = new ArrayList<>();
+        File[] files = new File(dir).listFiles();
+        if (files != null) {
+            for (File file : files) {
+                if (file.isFile()) {
+                    fileList.add(file);
+                }
+            }
+        }
+        return fileList;
+    }
+
     public interface DownloaderFeedback {
         void updateProgress(int curr, int max);
     }

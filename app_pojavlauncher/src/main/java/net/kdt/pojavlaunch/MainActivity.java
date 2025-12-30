@@ -77,6 +77,7 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class MainActivity extends BaseActivity implements ControlButtonMenuListener, EditorExitable, ServiceConnection {
+    public static final String INTENT_LAUCH_USER = "intent_launch_user";
     public static volatile ClipboardManager GLOBAL_CLIPBOARD;
     public static final String TAG = "MainActivity";
     public static final String INTENT_MINECRAFT_VERSION = "intent_version";
@@ -248,6 +249,7 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
             drawerLayout.closeDrawers();
 
             final String finalVersion = version;
+            String mcUUIDOrName = getIntent().getStringExtra(INTENT_LAUCH_USER);
             minecraftGLView.setSurfaceReadyListener(() -> {
                 try {
                     // Setup virtual mouse right before launching
@@ -255,7 +257,7 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
                         touchpad.post(() -> touchpad.switchState());
                     }
 
-                    runCraft(finalVersion, mVersionInfo);
+                    runCraft(finalVersion, mVersionInfo, mcUUIDOrName);
                 }catch (Throwable e){
                     Tools.showErrorRemote(e);
                 }
@@ -392,7 +394,7 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
         }
     }
 
-    private void runCraft(String versionId, JMinecraftVersionList.Version version) throws Throwable {
+    private void runCraft(String versionId, JMinecraftVersionList.Version version, String nameORUUID) throws Throwable {
         String assetVersion;
         try {
             if (version.inheritsFrom != null) { // We are almost definitely modded if this runs
@@ -448,7 +450,7 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
             if (Integer.parseInt(assetVersion) <= 12) folder.mkdir();
         } catch (NumberFormatException e) { folder.mkdir(); }
 
-        MinecraftAccount minecraftAccount = PojavProfile.getCurrentProfileContent(this, null);
+        MinecraftAccount minecraftAccount = PojavProfile.getCurrentProfileContent(this, nameORUUID);
         if (hasMods("sodium"))
             Logger.appendToLog("WARNING: Sodium is being used, Amethyst-Android does NOT support this mod, you are on your own");
         Logger.appendToLog("--------- Starting game with Launcher Debug!");

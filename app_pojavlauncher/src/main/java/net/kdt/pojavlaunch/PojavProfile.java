@@ -2,10 +2,8 @@ package net.kdt.pojavlaunch;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
 import net.kdt.pojavlaunch.value.MinecraftAccount;
 
 import java.io.File;
@@ -16,12 +14,12 @@ import java.util.List;
 import java.util.Objects;
 
 public class PojavProfile {
-	private static final String PROFILE_PREF = "pojav_profile";
-	private static final String PROFILE_PREF_FILE = "file";
+    private static final String PROFILE_PREF = "pojav_profile";
+    private static final String PROFILE_PREF_FILE = "file";
 
-	public static SharedPreferences getPrefs(Context ctx) {
-		return ctx.getSharedPreferences(PROFILE_PREF, Context.MODE_PRIVATE);
-	}
+    public static SharedPreferences getPrefs(Context ctx) {
+        return ctx.getSharedPreferences(PROFILE_PREF, Context.MODE_PRIVATE);
+    }
 
     public static MinecraftAccount getCurrentProfileContent(@NonNull Context ctx, @Nullable String profileName) {
         return MinecraftAccount.load(profileName == null ? getCurrentProfileName(ctx) : profileName);
@@ -57,21 +55,22 @@ public class PojavProfile {
 		}
 		return accountList;
 	}
-	
-	public static void setCurrentProfile(@NonNull Context ctx, @Nullable  Object obj) {
-		SharedPreferences.Editor pref = getPrefs(ctx).edit();
-		
-		try { if (obj instanceof String) {
+
+    public static void setCurrentProfile(@NonNull Context ctx, @Nullable Object obj) {
+        SharedPreferences.Editor pref = getPrefs(ctx).edit();
+
+        try {
+            if (obj instanceof String) {
                 String acc = (String) obj;
-				pref.putString(PROFILE_PREF_FILE, acc);
+                pref.putString(PROFILE_PREF_FILE, acc);
                 //MinecraftAccount.clearTempAccount();
-			} else if (obj == null) {
-				pref.putString(PROFILE_PREF_FILE, "");
-			} else {
-				throw new IllegalArgumentException("Profile must be String.class or null");
-			}
-		} finally {
-			pref.apply();
-		}
-	}
+            } else if (obj == null) {
+                pref.putString(PROFILE_PREF_FILE, "");
+            } else {
+                throw new IllegalArgumentException("Profile must be String.class or null");
+            }
+        } finally {
+            pref.apply();
+        }
+    }
 }

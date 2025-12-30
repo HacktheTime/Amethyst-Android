@@ -130,6 +130,17 @@
             <property android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
                 android:value="This application is intended to run a 3rd-party piece of software which cannot be managed using the activity's saved instance state. This service is used for background persistence of this piece of software."/>
         </service>
+        <activity android:name=".api.StartMinecraftActivity" android:exported="true">
+            <intent-filter>
+                <action android:name=".action.START_PROFILE"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        <service android:name=".api.LaunchIntentDataProviderService" android:exported="true">
+            <intent-filter>
+                <action android:name=".action.GET_PROFILE_IDS"/>
+            </intent-filter>
+        </service>
     </application>
     <queries>
         <package android:name="net.kdt.pojavlaunch.ffmpeg"/>

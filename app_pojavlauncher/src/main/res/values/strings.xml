@@ -501,4 +501,16 @@
     </string>
     <string name="not_modpack_file">Not a modpack file!</string>
 
+    <string name="app_id">App ID</string>
+    <string name="profile_name">Profile Name</string>
+    <string name="username">Username</string>
+
+    <!-- Start screen strings -->
+    <string name="start_screen_title">Launching Minecraft…</string>
+    <string name="start_screen_account_label">Account</string>
+    <string name="start_screen_profile_label">Profile</string>
+    <string name="start_screen_version_label">Version</string>
+    <string name="start_screen_status_preparing">Preparing launch…</string>
+    <string name="start_screen_status_downloading">Downloading required files…</string>
+    <string name="start_screen_status_token_refresh_failed">Microsoft token refresh failed; continuing with existing session.</string>
 </resources>
